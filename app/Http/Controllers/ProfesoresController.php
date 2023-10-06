@@ -11,7 +11,9 @@ class ProfesoresController extends Controller
     public function index()
     {
 
-        return view('welcome');
+        $datos = Profesores::all();
+        return view('inicio',compact('datos'));
+
     }
 
 
