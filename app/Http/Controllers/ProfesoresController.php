@@ -19,8 +19,8 @@ class ProfesoresController extends Controller
 
     public function create()
     {
-        return  "aqui puede agregar";
-        // formulario
+        return  view('agregarDocente'); // agregarDocente.blade.php solo se pone agregarDocente
+
     }
 
 

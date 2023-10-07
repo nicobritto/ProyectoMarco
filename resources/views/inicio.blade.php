@@ -4,12 +4,12 @@
 @section('ProyectoMarcoSecretaria','Proyecto marco para Secretaria')
 
 @section('contenido')
-    <br><br>
+
     <div class="card">
 
         <h5 class="card-header">Crud Profesores</h5>
         <div class="card-body">
-            <h5 class="card-title">Listado de Profesores</h5>
+            <h5 class="card-title text-center">Listado de Profesores</h5>
             <p>
                 <a href="{{route("profesores.create")}}"  class="btn btn-primary">Abregar un Nuevo Docente</a>
             </p>
