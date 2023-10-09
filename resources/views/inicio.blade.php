@@ -11,8 +11,18 @@
         <div class="card-body">
             <h5 class="card-title text-center">Listado de Profesores</h5>
             <p>
-                <a href="{{route("profesores.create")}}"  class="btn btn-primary">Abregar un Nuevo Docente</a>
+                <a href="{{route("profesores.create")}}"  class="btn btn-primary">
+                    <span class="fas fa-user-plus"></span> Abregar un Nuevo Docente
+                </a>
             </p>
+            <div class="col-sm-12">
+                @if($mensaje=Session::get('mensaje'))
+                    <div class="alert alert-success" role="alert">
+                        {{$mensaje}}
+                    </div>
+                @endif
+
+            </div>
             <hr>
 
             <p class="card-text">
@@ -30,8 +40,21 @@
                             <td> {{$item->nombre}}</td>
                             <td>{{$item->contacto}} </td>
                             <td>{{$item->escalafon}} </td>
-                            <td> </td>
-                            <td> </td>
+                            <td>
+                                <form action="{{route('profesores.edit',$item->id)}}" method="get">
+                                    <button class="btn btn-warning btn-sm">
+                                        <span class="fas fa-user-edit"></span>
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td>
+                                <form>
+                                    <button class="btn btn-danger btn-sm">
+                                        <span class="fas fa-user-times"></span>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
 
@@ -43,6 +66,24 @@
 
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 @endsection

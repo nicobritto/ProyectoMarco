@@ -26,25 +26,45 @@ class ProfesoresController extends Controller
 
     public function store(Request $request)
     {
-        // guardar datos
+        $profesores= new Profesores();
+        $profesores->nombre = $request->post('nombre');
+        $profesores->contacto = $request->post('contacto');
+        $profesores->escalafon = $request->post('escalafon');
+        $profesores ->save();
+
+        return redirect()->route('profesores.index')->with("mensaje","Agregado con Exito!");
     }
 
 
     public function show(Profesores $profesores)
     {
         // mostrar un solo registro
+
+        return  view('eliminar');
+
     }
 
 
-    public function edit(Profesores $profesores)
+    public function edit($id)
     {
-        return "aca se actualiza";
+        $profesores = Profesores::find($id);
+
+
+        return  view('actualizarDocente',compact("profesores"));
     }
 
 
-    public function update(Request $request, Profesores $profesores)
+    public function update(Request $request,$id)
     {
-        //
+            $profesores=Profesores::find($id);
+            $profesores->nombre = $request->post('nombre');
+            $profesores->contacto = $request->post('contacto');
+            $profesores->escalafon = $request->post('escalafon');
+            $profesores ->save();
+
+        return redirect()->route('profesores.index')->with("mensaje","Actualizado con Exito!");
+
+
     }
 
 
