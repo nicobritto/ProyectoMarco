@@ -15,8 +15,9 @@ Route::get('/edit/{id}',[ProfesoresController::class,'edit'])->name('profesores.
 
 Route::put('/update/{id}',[ProfesoresController::class,'update'])->name('profesores.update');
 
-Route::get('/show',[ProfesoresController::class,'show'])->name('profesores.show');
+Route::get('/show/{id}',[ProfesoresController::class,'show'])->name('profesores.show');
 
+Route::delete('/destroy/{id}',[ProfesoresController::class,'destroy'])->name('profesores.destroy');
 
 
 

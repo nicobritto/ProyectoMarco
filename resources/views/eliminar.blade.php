@@ -10,10 +10,10 @@
 
             <p class="card-text">
 
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger " role="alert">
                     Estas seguro de eliminar este registro
 
-                <table class="table table-sm table-hover">
+                <table class="table table-sm table-hover table-bordered" >
                     <thead>
                     <th>Nombre</th>
                     <th>Contacto</th>
@@ -22,15 +22,17 @@
 
                     <tbody>
                     <tr>
-                        <td> asd</td>
-                        <td>asd </td>
-                        <td>asd </td>
+                        <td> {{$profesores -> nombre}}  </td>
+                        <td> {{$profesores -> contacto}}   </td>
+                        <td>  {{$profesores -> escalafon }}  </td>
 
                     </tr>
                     </tbody>
                 </table>
                 <hr>
-                <form action="">
+                <form action="{{route("profesores.destroy",$profesores->id)}}" method="post">
+                    @csrf
+                    @method('DELETE')
                     <a href="{{route("profesores.index")}}" class="btn btn-info">
                         <span class="fas fa-undo-alt"></span>Regresar</a>
                     <button class="btn btn-danger">   <span class="fas fa-user-times"> Eliminar</button>

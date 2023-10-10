@@ -11,7 +11,7 @@ class ProfesoresController extends Controller
     public function index()
     {
 
-        $datos = Profesores::all();
+        $datos = Profesores::orderBy('escalafon','desc')->paginate(3);
         return view('inicio',compact('datos'));
 
     }
@@ -36,11 +36,12 @@ class ProfesoresController extends Controller
     }
 
 
-    public function show(Profesores $profesores)
+    public function show($id)
     {
-        // mostrar un solo registro
+        //eliminar
+        $profesores = Profesores::find($id);
 
-        return  view('eliminar');
+        return  view('eliminar',compact("profesores"));
 
     }
 
@@ -68,8 +69,11 @@ class ProfesoresController extends Controller
     }
 
 
-    public function destroy(Profesores $profesores)
+    public function destroy($id)
     {
-        //
+        $profesor=Profesores::find($id);
+        $profesor->delete();
+        return redirect()->route('profesores.index')->with("mensaje","Eliminado con Exito!");
+
     }
 }

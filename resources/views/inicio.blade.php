@@ -49,7 +49,7 @@
                             </td>
 
                             <td>
-                                <form>
+                                <form action="{{route('profesores.show',$item->id)}}" method="get" >
                                     <button class="btn btn-danger btn-sm">
                                         <span class="fas fa-user-times"></span>
                                     </button>
@@ -60,6 +60,12 @@
 
                     </tbody>
                 </table>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-12">
+                        {{$datos->links()}}
+                    </div>
+                </div>
                     </thead>
                 </div>
             </p>
