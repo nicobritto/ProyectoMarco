@@ -28,28 +28,6 @@ Route::get('/home', function() {
 })->name('home')->middleware('auth');
 
 Route::middleware('auth')->group(function (){
-    Route::get('/events', function (){
-
-        //Obtener los eventos de la BD
-        $events = \App\Models\Event::all();
-
-        // Asignar la cabecera de la datatable
-        $heads = [
-            'ID',
-            'Nombre',
-            'Descripcion',
-            'Estado',
-            'Tipo',
-            'Fecha'
-        ];
-
-        //Retornar la vista con los parametros
-       return view('events', compact('events', 'heads'));
-   });
-
-    Route::get('/events/create', function (){
-        return view('events-create');
-    });
 
     Route::get('/teachers', function (){
        //Obtener datos de la BS
