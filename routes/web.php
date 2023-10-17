@@ -1,38 +1,79 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\ProfesoresController;
 
-//primera parte a que parte del controlador va ir
-//Route::get('/create' <----   segunda parte lo q usamos nosots 'profesores.index' en la pagina http:// etc
-Route::get('/',[ProfesoresController::class,'index'])->name('profesores.index');
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
 
-Route::get('/create',[ProfesoresController::class,'create'])->name('profesores.create');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::post('/store',[ProfesoresController::class,'store'])->name('profesores.store');
+Auth::routes();
 
-Route::get('/edit/{id}',[ProfesoresController::class,'edit'])->name('profesores.edit');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::put('/update/{id}',[ProfesoresController::class,'update'])->name('profesores.update');
+Auth::routes();
 
-Route::get('/show/{id}',[ProfesoresController::class,'show'])->name('profesores.show');
+Route::get('/home', function() {
+    return view('home');
+})->name('home')->middleware('auth');
 
-Route::delete('/destroy/{id}',[ProfesoresController::class,'destroy'])->name('profesores.destroy');
+Route::middleware('auth')->group(function (){
+    Route::get('/events', function (){
 
+        //Obtener los eventos de la BD
+        $events = \App\Models\Event::all();
 
+        // Asignar la cabecera de la datatable
+        $heads = [
+            'ID',
+            'Nombre',
+            'Descripcion',
+            'Estado',
+            'Tipo',
+            'Fecha'
+        ];
 
+        //Retornar la vista con los parametros
+       return view('events', compact('events', 'heads'));
+   });
 
+    Route::get('/events/create', function (){
+        return view('events-create');
+    });
 
+    Route::get('/teachers', function (){
+       //Obtener datos de la BS
+        $teachers = \App\Models\Teacher::all();
 
+        //Asignar la cabecera de la datatable
+        $heads = [
+            'ID',
+            'Nombre y Apellido',
+            'Especialidad',
+            'Email',
+            'Fecha de contratacion',
+            'Escalafon'
+        ];
+        //Retornar la vista con los parametros
+        return view('teachers', compact('teachers', 'heads'));
+    });
 
+    // Ruta para mostrar el formulario de creación de profesores
+    Route::get('/teachers/create', function (){
+        return view('teachers-create');
+    });
 
-
-
-
-
-
-
-
-
-
+    // Ruta para almacenar los datos de profesores
+    Route::post('/teachers', 'TeacherController@store')->name('teachers.store');
+});
 
